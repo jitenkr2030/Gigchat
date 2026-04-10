@@ -199,20 +199,20 @@ export default function Home() {
         </header>
 
         {/* Demo Login */}
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+          <div className="text-center mb-8 sm:mb-12">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               Welcome to
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                 {" "}GigChat Demo
               </span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 px-4">
               Experience the platform with demo accounts
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Customer Demo */}
             <Card className="border-2 border-purple-200 hover:border-purple-400 transition-colors">
               <CardHeader>
@@ -304,7 +304,7 @@ export default function Home() {
           </div>
 
           {/* Features */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <Card>
               <CardHeader>
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
@@ -343,12 +343,12 @@ export default function Home() {
           </div>
 
           {/* Demo Credentials */}
-          <Card className="mt-8 border-2 border-yellow-200 bg-yellow-50">
+          <Card className="mt-6 sm:mt-8 border-2 border-yellow-200 bg-yellow-50">
             <CardHeader>
-              <CardTitle className="text-yellow-800">Demo Credentials</CardTitle>
+              <CardTitle className="text-yellow-800 text-lg sm:text-xl">Demo Credentials</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 text-sm">
                 <div>
                   <p className="font-medium text-yellow-800">Customer Login:</p>
                   <p className="text-yellow-700">Email: customer@demo.com</p>
@@ -386,25 +386,28 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+      <header className="bg-white shadow-sm border-b sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg"></div>
-              <span className="text-xl font-bold">GigChat Demo</span>
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg"></div>
+              <span className="text-lg sm:text-xl font-bold hidden sm:block">GigChat Demo</span>
+              <span className="text-lg sm:text-xl font-bold sm:hidden">GC</span>
             </div>
-            <div className="flex items-center space-x-4">
-              <Badge variant="outline" className="text-green-600 border-green-600">
-                <div className="w-2 h-2 bg-green-600 rounded-full mr-2"></div>
-                {onlineCreators} Online
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <Badge variant="outline" className="text-green-600 border-green-600 text-xs sm:text-sm">
+                <div className="w-2 h-2 bg-green-600 rounded-full mr-1 sm:mr-2"></div>
+                <span className="hidden sm:inline">{onlineCreators} Online</span>
+                <span className="sm:hidden">{onlineCreators}</span>
               </Badge>
-              <Badge variant="outline">
-                <Wallet className="w-4 h-4 mr-1" />
-                ${currentDemoUser.balance || 0}
+              <Badge variant="outline" className="text-xs sm:text-sm">
+                <Wallet className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                <span className="hidden sm:inline">${currentDemoUser.balance || 0}</span>
+                <span className="sm:hidden">${currentDemoUser.balance || 0}</span>
               </Badge>
-              <Button variant="outline" size="sm" onClick={simulateLogout}>
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
+              <Button variant="outline" size="sm" onClick={simulateLogout} className="h-8 px-2 sm:h-9 sm:px-3">
+                <LogOut className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                <span className="hidden sm:inline">Logout</span>
               </Button>
             </div>
           </div>
@@ -412,95 +415,95 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
+      <main className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
+        <div className="mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4 space-y-2 sm:space-y-0">
             <div>
-              <h1 className="text-2xl font-bold">
+              <h1 className="text-xl sm:text-2xl font-bold">
                 Welcome, {currentDemoUser.name}!
               </h1>
-              <p className="text-gray-600">
+              <p className="text-sm sm:text-base text-gray-600">
                 {currentDemoUser.role === 'CUSTOMER' ? 'Browse creators and start conversations' : 'Manage your creator profile and earnings'}
               </p>
             </div>
-            <Badge variant={currentDemoUser.role === 'CREATOR' ? 'default' : 'secondary'}>
+            <Badge variant={currentDemoUser.role === 'CREATOR' ? 'default' : 'secondary'} className="w-fit">
               {currentDemoUser.role}
             </Badge>
           </div>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className={`grid w-full ${isAdmin ? 'grid-cols-5' : 'grid-cols-4'}`}>
-            <TabsTrigger value="browse">Browse</TabsTrigger>
-            <TabsTrigger value="chat" disabled={!selectedCreator}>
-              <MessageSquare className="w-4 h-4 mr-2" />
-              Chat
+          <TabsList className={`grid w-full ${isAdmin ? 'grid-cols-5' : 'grid-cols-4'} h-auto py-2 px-1 sm:px-2`}>
+            <TabsTrigger value="browse" className="text-xs sm:text-sm py-2 px-1 sm:px-3">Browse</TabsTrigger>
+            <TabsTrigger value="chat" disabled={!selectedCreator} className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+              <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+              <span className="hidden sm:inline">Chat</span>
             </TabsTrigger>
-            <TabsTrigger value="wallet">
-              <Wallet className="w-4 h-4 mr-2" />
-              Wallet
+            <TabsTrigger value="wallet" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+              <Wallet className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+              <span className="hidden sm:inline">Wallet</span>
             </TabsTrigger>
             {currentDemoUser.role === 'CREATOR' && (
-              <TabsTrigger value="earnings">
-                <TrendingUp className="w-4 h-4 mr-2" />
-                Earnings
+              <TabsTrigger value="earnings" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                <span className="hidden sm:inline">Earnings</span>
               </TabsTrigger>
             )}
             {isAdmin && (
-              <TabsTrigger value="admin">
-                <Shield className="w-4 h-4 mr-2" />
-                Admin
+              <TabsTrigger value="admin" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                <Shield className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                <span className="hidden sm:inline">Admin</span>
               </TabsTrigger>
             )}
           </TabsList>
 
-          <TabsContent value="browse" className="space-y-6">
+          <TabsContent value="browse" className="space-y-4 sm:space-y-6">
             <Card>
-              <CardHeader>
-                <CardTitle>Available Creators</CardTitle>
-                <CardDescription>Connect with creators instantly</CardDescription>
+              <CardHeader className="pb-3 sm:pb-6">
+                <CardTitle className="text-lg sm:text-xl">Available Creators</CardTitle>
+                <CardDescription className="text-sm sm:text-base">Connect with creators instantly</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3 sm:space-y-4">
                 {creators.map((creator) => (
-                  <div key={creator.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                    <div className="flex items-center space-x-4">
-                      <Avatar>
+                  <div key={creator.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 border rounded-lg hover:bg-gray-50 transition-colors space-y-3 sm:space-y-0">
+                    <div className="flex items-center space-x-3 sm:space-x-4">
+                      <Avatar className="w-10 h-10 sm:w-12 sm:h-12">
                         <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${creator.id}`} />
                         <AvatarFallback>{creator.name.charAt(0)}</AvatarFallback>
                       </Avatar>
-                      <div>
-                        <div className="flex items-center space-x-2">
-                          <h3 className="font-semibold">{creator.name}</h3>
-                          <Badge variant="outline" className="text-green-600 border-green-600">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center space-x-2 mb-1">
+                          <h3 className="font-semibold text-sm sm:text-base truncate">{creator.name}</h3>
+                          <Badge variant="outline" className="text-green-600 border-green-600 text-xs">
                             <div className="w-2 h-2 bg-green-600 rounded-full mr-1"></div>
                             Online
                           </Badge>
                         </div>
-                        <p className="text-sm text-gray-600">Fluent in English, Hindi</p>
-                        <div className="flex items-center space-x-4 mt-1">
+                        <p className="text-xs sm:text-sm text-gray-600">Fluent in English, Hindi</p>
+                        <div className="flex items-center space-x-3 sm:space-x-4 mt-1">
                           <div className="flex items-center">
-                            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                            <span className="text-sm ml-1">{creator.rating}</span>
+                            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500 fill-current" />
+                            <span className="text-xs sm:text-sm ml-1">{creator.rating}</span>
                           </div>
                           <div className="flex items-center">
-                            <DollarSign className="w-4 h-4 text-green-600" />
-                            <span className="text-sm font-semibold">${creator.pricePerMinute}/min</span>
+                            <DollarSign className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
+                            <span className="text-xs sm:text-sm font-semibold">${creator.pricePerMinute}/min</span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="flex space-x-2">
-                      <Button size="sm" variant="outline" onClick={() => startChat(creator)}>
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                      <Button size="sm" variant="outline" onClick={() => startChat(creator)} className="w-full sm:w-auto">
                         <MessageCircle className="w-4 h-4 mr-1" />
-                        Chat
+                        <span className="hidden sm:inline">Chat</span>
                       </Button>
-                      <Button size="sm" variant="outline" onClick={startVoiceCall} disabled={inCall}>
+                      <Button size="sm" variant="outline" onClick={startVoiceCall} disabled={inCall} className="w-full sm:w-auto">
                         <Phone className="w-4 h-4 mr-1" />
-                        Call
+                        <span className="hidden sm:inline">Call</span>
                       </Button>
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" className="w-full sm:w-auto">
                         <Video className="w-4 h-4 mr-1" />
-                        Video
+                        <span className="hidden sm:inline">Video</span>
                       </Button>
                     </div>
                   </div>
@@ -509,44 +512,45 @@ export default function Home() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="chat" className="space-y-6">
+          <TabsContent value="chat" className="space-y-4 sm:space-y-6">
             {selectedCreator && (
               <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
+                <CardHeader className="pb-3 sm:pb-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
                     <div className="flex items-center space-x-3">
-                      <Avatar>
+                      <Avatar className="w-10 h-10 sm:w-12 sm:h-12">
                         <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${selectedCreator.id}`} />
                         <AvatarFallback>{selectedCreator.name.charAt(0)}</AvatarFallback>
                       </Avatar>
                       <div>
-                        <h3 className="font-semibold">{selectedCreator.name}</h3>
-                        <p className="text-sm text-gray-600">
+                        <h3 className="font-semibold text-sm sm:text-base">{selectedCreator.name}</h3>
+                        <p className="text-xs sm:text-sm text-gray-600">
                           {isTyping ? 'Typing...' : 'Online'}
                         </p>
                       </div>
                     </div>
                     <div className="flex space-x-2">
-                      <Button size="sm" variant="outline" onClick={startVoiceCall} disabled={inCall}>
-                        <Phone className="w-4 h-4 mr-1" />
-                        Voice Call
+                      <Button size="sm" variant="outline" onClick={startVoiceCall} disabled={inCall} className="flex-1 sm:flex-none">
+                        <Phone className="w-4 h-4 mr-1 sm:mr-2" />
+                        <span className="hidden sm:inline">Voice Call</span>
+                        <span className="sm:hidden">Call</span>
                       </Button>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-4">
                   {/* Call UI */}
                   {inCall && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
                           <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                          <span className="font-medium">Call with {selectedCreator.name}</span>
-                          <span className="text-sm text-gray-600">{formatDuration(callDuration)}</span>
-                          <span className="text-sm text-red-600">Cost: ${callCost.toFixed(2)}</span>
+                          <span className="font-medium text-sm sm:text-base">Call with {selectedCreator.name}</span>
+                          <span className="text-xs sm:text-sm text-gray-600">{formatDuration(callDuration)}</span>
+                          <span className="text-xs sm:text-sm text-red-600">Cost: ${callCost.toFixed(2)}</span>
                         </div>
-                        <Button size="sm" variant="destructive" onClick={endCall}>
-                          <PhoneOff className="w-4 h-4 mr-1" />
+                        <Button size="sm" variant="destructive" onClick={endCall} className="w-full sm:w-auto">
+                          <PhoneOff className="w-4 h-4 mr-1 sm:mr-2" />
                           End Call
                         </Button>
                       </div>
@@ -554,21 +558,21 @@ export default function Home() {
                   )}
 
                   {/* Messages */}
-                  <ScrollArea className="h-96 mb-4 border rounded-lg p-4">
-                    <div className="space-y-4">
+                  <ScrollArea className="h-64 sm:h-96 mb-4 border rounded-lg p-3 sm:p-4">
+                    <div className="space-y-3 sm:space-y-4">
                       {messages.map((message) => (
                         <div
                           key={message.id}
                           className={`flex ${message.senderId === currentDemoUser.id ? 'justify-end' : 'justify-start'}`}
                         >
                           <div
-                            className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                            className={`max-w-[80%] sm:max-w-xs lg:max-w-md px-3 sm:px-4 py-2 rounded-lg ${
                               message.senderId === currentDemoUser.id
                                 ? 'bg-purple-600 text-white'
                                 : 'bg-gray-100 text-gray-900'
                             }`}
                           >
-                            <p>{message.content}</p>
+                            <p className="text-sm sm:text-base">{message.content}</p>
                             <p className={`text-xs mt-1 ${
                               message.senderId === currentDemoUser.id ? 'text-purple-200' : 'text-gray-500'
                             }`}>
@@ -589,8 +593,9 @@ export default function Home() {
                       onChange={(e) => setNewMessage(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
                       disabled={inCall}
+                      className="flex-1"
                     />
-                    <Button onClick={sendChatMessage} disabled={inCall}>
+                    <Button onClick={sendChatMessage} disabled={inCall} size="sm" className="px-3">
                       <Send className="w-4 h-4" />
                     </Button>
                   </div>
@@ -599,27 +604,27 @@ export default function Home() {
             )}
           </TabsContent>
 
-          <TabsContent value="wallet" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <TabsContent value="wallet" className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>Wallet Balance</CardTitle>
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="text-lg sm:text-xl">Wallet Balance</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-green-600 mb-4">
+                  <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-4">
                     ${currentDemoUser.balance || 0}
                   </div>
                   <div className="space-y-2">
-                    <Button className="w-full mb-2">Add $10</Button>
-                    <Button variant="outline" className="w-full mb-2">Add $25</Button>
-                    <Button variant="outline" className="w-full">Add $50</Button>
+                    <Button className="w-full mb-2 text-sm sm:text-base">Add $10</Button>
+                    <Button variant="outline" className="w-full mb-2 text-sm sm:text-base">Add $25</Button>
+                    <Button variant="outline" className="w-full text-sm sm:text-base">Add $50</Button>
                   </div>
                 </CardContent>
               </Card>
 
               <Card>
-                <CardHeader>
-                  <CardTitle>Recent Activity</CardTitle>
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="text-lg sm:text-xl">Recent Activity</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -642,36 +647,36 @@ export default function Home() {
           </TabsContent>
 
           {currentDemoUser.role === 'CREATOR' && (
-            <TabsContent value="earnings" className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <TabsContent value="earnings" className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Total Earned</CardTitle>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Total Earned</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-green-600">
+                    <div className="text-xl sm:text-2xl font-bold text-green-600">
                       ${currentDemoUser.balance || 0}
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Today's Earnings</CardTitle>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Today's Earnings</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-blue-600">
+                    <div className="text-xl sm:text-2xl font-bold text-blue-600">
                       $45.50
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Ranking</CardTitle>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Ranking</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-purple-600">
+                    <div className="text-xl sm:text-2xl font-bold text-purple-600">
                       #12
                     </div>
                   </CardContent>
@@ -679,12 +684,12 @@ export default function Home() {
               </div>
 
               <Card>
-                <CardHeader>
-                  <CardTitle>Earnings This Week</CardTitle>
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="text-lg sm:text-xl">Earnings This Week</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-                    <p className="text-gray-500">Earnings chart would go here</p>
+                  <div className="h-48 sm:h-64 bg-gray-50 rounded-lg flex items-center justify-center">
+                    <p className="text-gray-500 text-sm sm:text-base">Earnings chart would go here</p>
                   </div>
                 </CardContent>
               </Card>
@@ -692,82 +697,82 @@ export default function Home() {
           )}
 
           {isAdmin && (
-            <TabsContent value="admin" className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <TabsContent value="admin" className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Total Users</CardTitle>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Total Users</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-blue-600">1,247</div>
-                    <p className="text-sm text-gray-600">+12% this month</p>
+                    <div className="text-xl sm:text-2xl font-bold text-blue-600">1,247</div>
+                    <p className="text-xs sm:text-sm text-gray-600">+12% this month</p>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Active Creators</CardTitle>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Active Creators</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-green-600">342</div>
-                    <p className="text-sm text-gray-600">89 online now</p>
+                    <div className="text-xl sm:text-2xl font-bold text-green-600">342</div>
+                    <p className="text-xs sm:text-sm text-gray-600">89 online now</p>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Total Revenue</CardTitle>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Total Revenue</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-purple-600">$24,580</div>
-                    <p className="text-sm text-gray-600">+8% this week</p>
+                    <div className="text-xl sm:text-2xl font-bold text-purple-600">$24,580</div>
+                    <p className="text-xs sm:text-sm text-gray-600">+8% this week</p>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Pending Reports</CardTitle>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Pending Reports</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-red-600">7</div>
-                    <p className="text-sm text-gray-600">Need review</p>
+                    <div className="text-xl sm:text-2xl font-bold text-red-600">7</div>
+                    <p className="text-xs sm:text-sm text-gray-600">Need review</p>
                   </CardContent>
                 </Card>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 <Card>
-                  <CardHeader>
-                    <CardTitle>User Management</CardTitle>
-                    <CardDescription>Manage platform users</CardDescription>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">User Management</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">Manage platform users</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       {[
                         { id: 1, name: 'John Doe', email: 'john@example.com', role: 'CUSTOMER', status: 'Active' },
                         { id: 2, name: 'Sarah Miller', email: 'sarah@example.com', role: 'CREATOR', status: 'Active' },
                         { id: 3, name: 'Mike Johnson', email: 'mike@example.com', role: 'CUSTOMER', status: 'Banned' },
                         { id: 4, name: 'Emma Wilson', email: 'emma@example.com', role: 'CREATOR', status: 'Active' }
                       ].map((user) => (
-                        <div key={user.id} className="flex items-center justify-between p-3 border rounded-lg">
-                          <div>
-                            <p className="font-medium">{user.name}</p>
-                            <p className="text-sm text-gray-600">{user.email}</p>
-                            <Badge variant={user.role === 'CREATOR' ? 'default' : 'secondary'} className="mt-1">
+                        <div key={user.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 border rounded-lg space-y-2 sm:space-y-0">
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-sm sm:text-base truncate">{user.name}</p>
+                            <p className="text-xs sm:text-sm text-gray-600 truncate">{user.email}</p>
+                            <Badge variant={user.role === 'CREATOR' ? 'default' : 'secondary'} className="mt-1 text-xs">
                               {user.role}
                             </Badge>
                           </div>
-                          <div className="flex space-x-2">
-                            <Badge variant={user.status === 'Active' ? 'default' : 'destructive'}>
+                          <div className="flex items-center space-x-2">
+                            <Badge variant={user.status === 'Active' ? 'default' : 'destructive'} className="text-xs">
                               {user.status}
                             </Badge>
                             {user.status === 'Active' ? (
                               <Button size="sm" variant="destructive">
-                                <UserX className="w-4 h-4" />
+                                <UserX className="w-3 h-3 sm:w-4 sm:h-4" />
                               </Button>
                             ) : (
                               <Button size="sm" variant="outline">
-                                <UserCheck className="w-4 h-4" />
+                                <UserCheck className="w-3 h-3 sm:w-4 sm:h-4" />
                               </Button>
                             )}
                           </div>
@@ -778,32 +783,32 @@ export default function Home() {
                 </Card>
 
                 <Card>
-                  <CardHeader>
-                    <CardTitle>Recent Reports</CardTitle>
-                    <CardDescription>User safety reports</CardDescription>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Recent Reports</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">User safety reports</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       {[
                         { id: 1, reporter: 'Alice', reported: 'Bob', reason: 'Inappropriate content', status: 'Pending' },
                         { id: 2, reporter: 'Charlie', reported: 'David', reason: 'Spam', status: 'Resolved' },
                         { id: 3, reporter: 'Eve', reported: 'Frank', reason: 'Harassment', status: 'Pending' }
                       ].map((report) => (
-                        <div key={report.id} className="flex items-center justify-between p-3 border rounded-lg">
-                          <div>
-                            <p className="font-medium">{report.reason}</p>
-                            <p className="text-sm text-gray-600">
+                        <div key={report.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 border rounded-lg space-y-2 sm:space-y-0">
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-sm sm:text-base">{report.reason}</p>
+                            <p className="text-xs sm:text-sm text-gray-600">
                               {report.reporter} reported {report.reported}
                             </p>
                           </div>
-                          <div className="flex space-x-2">
-                            <Badge variant={report.status === 'Pending' ? 'destructive' : 'default'}>
+                          <div className="flex items-center space-x-2">
+                            <Badge variant={report.status === 'Pending' ? 'destructive' : 'default'} className="text-xs">
                               {report.status}
                             </Badge>
                             {report.status === 'Pending' && (
                               <div className="flex space-x-1">
-                                <Button size="sm" variant="outline">Review</Button>
-                                <Button size="sm" variant="destructive">Ban</Button>
+                                <Button size="sm" variant="outline" className="text-xs">Review</Button>
+                                <Button size="sm" variant="destructive" className="text-xs">Ban</Button>
                               </div>
                             )}
                           </div>
@@ -815,13 +820,13 @@ export default function Home() {
               </div>
 
               <Card>
-                <CardHeader>
-                  <CardTitle>Platform Analytics</CardTitle>
-                  <CardDescription>Usage and performance metrics</CardDescription>
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="text-lg sm:text-xl">Platform Analytics</CardTitle>
+                  <CardDescription className="text-sm sm:text-base">Usage and performance metrics</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-                    <p className="text-gray-500">Analytics charts would go here</p>
+                  <div className="h-48 sm:h-64 bg-gray-50 rounded-lg flex items-center justify-center">
+                    <p className="text-gray-500 text-sm sm:text-base">Analytics charts would go here</p>
                   </div>
                 </CardContent>
               </Card>
