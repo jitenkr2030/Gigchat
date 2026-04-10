@@ -433,83 +433,254 @@ export default function Home() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className={`grid w-full ${isAdmin ? 'grid-cols-5' : 'grid-cols-4'} h-auto py-2 px-1 sm:px-2`}>
-            <TabsTrigger value="browse" className="text-xs sm:text-sm py-2 px-1 sm:px-3">Browse</TabsTrigger>
-            <TabsTrigger value="chat" disabled={!selectedCreator} className="text-xs sm:text-sm py-2 px-1 sm:px-3">
-              <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-              <span className="hidden sm:inline">Chat</span>
-            </TabsTrigger>
-            <TabsTrigger value="wallet" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
-              <Wallet className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-              <span className="hidden sm:inline">Wallet</span>
-            </TabsTrigger>
+          <TabsList className={`grid w-full ${isAdmin ? 'grid-cols-5' : currentDemoUser.role === 'CREATOR' ? 'grid-cols-4' : 'grid-cols-3'} h-auto py-2 px-1 sm:px-2`}>
+            {currentDemoUser.role === 'CUSTOMER' && (
+              <>
+                <TabsTrigger value="browse" className="text-xs sm:text-sm py-2 px-1 sm:px-3">Browse</TabsTrigger>
+                <TabsTrigger value="chat" disabled={!selectedCreator} className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                  <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Chat</span>
+                </TabsTrigger>
+                <TabsTrigger value="wallet" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                  <Wallet className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Wallet</span>
+                </TabsTrigger>
+              </>
+            )}
             {currentDemoUser.role === 'CREATOR' && (
-              <TabsTrigger value="earnings" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
-                <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                <span className="hidden sm:inline">Earnings</span>
-              </TabsTrigger>
+              <>
+                <TabsTrigger value="browse" className="text-xs sm:text-sm py-2 px-1 sm:px-3">Profile</TabsTrigger>
+                <TabsTrigger value="chat" disabled={!selectedCreator} className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                  <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Chat</span>
+                </TabsTrigger>
+                <TabsTrigger value="wallet" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                  <Wallet className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Wallet</span>
+                </TabsTrigger>
+                <TabsTrigger value="earnings" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                  <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Earnings</span>
+                </TabsTrigger>
+              </>
             )}
             {isAdmin && (
-              <TabsTrigger value="admin" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
-                <Shield className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                <span className="hidden sm:inline">Admin</span>
-              </TabsTrigger>
+              <>
+                <TabsTrigger value="browse" className="text-xs sm:text-sm py-2 px-1 sm:px-3">Overview</TabsTrigger>
+                <TabsTrigger value="chat" disabled={!selectedCreator} className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                  <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Chat</span>
+                </TabsTrigger>
+                <TabsTrigger value="wallet" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                  <Wallet className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Wallet</span>
+                </TabsTrigger>
+                <TabsTrigger value="earnings" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                  <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Analytics</span>
+                </TabsTrigger>
+                <TabsTrigger value="admin" className="text-xs sm:text-sm py-2 px-1 sm:px-3">
+                  <Shield className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Admin</span>
+                </TabsTrigger>
+              </>
             )}
           </TabsList>
 
           <TabsContent value="browse" className="space-y-4 sm:space-y-6">
-            <Card>
-              <CardHeader className="pb-3 sm:pb-6">
-                <CardTitle className="text-lg sm:text-xl">Available Creators</CardTitle>
-                <CardDescription className="text-sm sm:text-base">Connect with creators instantly</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3 sm:space-y-4">
-                {creators.map((creator) => (
-                  <div key={creator.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 border rounded-lg hover:bg-gray-50 transition-colors space-y-3 sm:space-y-0">
-                    <div className="flex items-center space-x-3 sm:space-x-4">
-                      <Avatar className="w-10 h-10 sm:w-12 sm:h-12">
-                        <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${creator.id}`} />
-                        <AvatarFallback>{creator.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center space-x-2 mb-1">
-                          <h3 className="font-semibold text-sm sm:text-base truncate">{creator.name}</h3>
-                          <Badge variant="outline" className="text-green-600 border-green-600 text-xs">
-                            <div className="w-2 h-2 bg-green-600 rounded-full mr-1"></div>
-                            Online
-                          </Badge>
-                        </div>
-                        <p className="text-xs sm:text-sm text-gray-600">Fluent in English, Hindi</p>
-                        <div className="flex items-center space-x-3 sm:space-x-4 mt-1">
-                          <div className="flex items-center">
-                            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500 fill-current" />
-                            <span className="text-xs sm:text-sm ml-1">{creator.rating}</span>
+            {currentDemoUser.role === 'CUSTOMER' ? (
+              // Customer View - Browse Creators
+              <Card>
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="text-lg sm:text-xl">Available Creators</CardTitle>
+                  <CardDescription className="text-sm sm:text-base">Connect with creators instantly</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3 sm:space-y-4">
+                  {creators.map((creator) => (
+                    <div key={creator.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 border rounded-lg hover:bg-gray-50 transition-colors space-y-3 sm:space-y-0">
+                      <div className="flex items-center space-x-3 sm:space-x-4">
+                        <Avatar className="w-10 h-10 sm:w-12 sm:h-12">
+                          <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${creator.id}`} />
+                          <AvatarFallback>{creator.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center space-x-2 mb-1">
+                            <h3 className="font-semibold text-sm sm:text-base truncate">{creator.name}</h3>
+                            <Badge variant="outline" className="text-green-600 border-green-600 text-xs">
+                              <div className="w-2 h-2 bg-green-600 rounded-full mr-1"></div>
+                              Online
+                            </Badge>
                           </div>
-                          <div className="flex items-center">
-                            <DollarSign className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
-                            <span className="text-xs sm:text-sm font-semibold">${creator.pricePerMinute}/min</span>
+                          <p className="text-xs sm:text-sm text-gray-600">Fluent in English, Hindi</p>
+                          <div className="flex items-center space-x-3 sm:space-x-4 mt-1">
+                            <div className="flex items-center">
+                              <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500 fill-current" />
+                              <span className="text-xs sm:text-sm ml-1">{creator.rating}</span>
+                            </div>
+                            <div className="flex items-center">
+                              <DollarSign className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
+                              <span className="text-xs sm:text-sm font-semibold">${creator.pricePerMinute}/min</span>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                        <Button size="sm" variant="outline" onClick={() => startChat(creator)} className="w-full sm:w-auto">
+                          <MessageCircle className="w-4 h-4 mr-1" />
+                          <span className="hidden sm:inline">Chat</span>
+                        </Button>
+                        <Button size="sm" variant="outline" onClick={startVoiceCall} disabled={inCall} className="w-full sm:w-auto">
+                          <Phone className="w-4 h-4 mr-1" />
+                          <span className="hidden sm:inline">Call</span>
+                        </Button>
+                        <Button size="sm" variant="outline" className="w-full sm:w-auto">
+                          <Video className="w-4 h-4 mr-1" />
+                          <span className="hidden sm:inline">Video</span>
+                        </Button>
+                      </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                      <Button size="sm" variant="outline" onClick={() => startChat(creator)} className="w-full sm:w-auto">
-                        <MessageCircle className="w-4 h-4 mr-1" />
-                        <span className="hidden sm:inline">Chat</span>
+                  ))}
+                </CardContent>
+              </Card>
+            ) : currentDemoUser.role === 'CREATOR' ? (
+              // Creator View - My Profile & Stats
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+                <Card className="lg:col-span-2">
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">My Creator Profile</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">Manage your creator profile and availability</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4 sm:space-y-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                      <Avatar className="w-16 h-16 sm:w-20 sm:h-20">
+                        <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${currentDemoUser.id}`} />
+                        <AvatarFallback className="text-lg sm:text-xl">{currentDemoUser.name.charAt(0)}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <h3 className="text-xl sm:text-2xl font-bold">{currentDemoUser.name}</h3>
+                        <p className="text-sm sm:text-base text-gray-600 mb-2">Professional Creator</p>
+                        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                          <div className="flex items-center">
+                            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500 fill-current" />
+                            <span className="ml-1 text-sm sm:text-base font-semibold">{currentDemoUser.rating || 4.8}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                            <span className="ml-1 text-sm sm:text-base font-semibold">${currentDemoUser.pricePerMinute || 2.5}/min</span>
+                          </div>
+                          <Badge variant="outline" className="text-green-600 border-green-600">
+                            <div className="w-2 h-2 bg-green-600 rounded-full mr-2"></div>
+                            Available
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <Label className="text-sm font-medium">Languages</Label>
+                        <p className="text-sm text-gray-600 mt-1">English, Hindi, Spanish</p>
+                      </div>
+                      <div>
+                        <Label className="text-sm font-medium">Specialties</Label>
+                        <p className="text-sm text-gray-600 mt-1">Life Coaching, Business, Technology</p>
+                      </div>
+                      <div>
+                        <Label className="text-sm font-medium">Response Time</Label>
+                        <p className="text-sm text-gray-600 mt-1">Usually within 1 minute</p>
+                      </div>
+                      <div>
+                        <Label className="text-sm font-medium">Availability</Label>
+                        <p className="text-sm text-gray-600 mt-1">Mon-Fri: 9AM-8PM</p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+                      <Button className="w-full sm:w-auto">
+                        <UserCheck className="w-4 h-4 mr-2" />
+                        Set Status: Available
                       </Button>
-                      <Button size="sm" variant="outline" onClick={startVoiceCall} disabled={inCall} className="w-full sm:w-auto">
-                        <Phone className="w-4 h-4 mr-1" />
-                        <span className="hidden sm:inline">Call</span>
-                      </Button>
-                      <Button size="sm" variant="outline" className="w-full sm:w-auto">
-                        <Video className="w-4 h-4 mr-1" />
-                        <span className="hidden sm:inline">Video</span>
+                      <Button variant="outline" className="w-full sm:w-auto">
+                        Edit Profile
                       </Button>
                     </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Today's Activity</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center">
+                      <div className="text-2xl sm:text-3xl font-bold text-green-600">$45.50</div>
+                      <p className="text-sm text-gray-600">Earned Today</p>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Chats</span>
+                        <span className="font-medium">12</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Calls</span>
+                        <span className="font-medium">3</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Total Minutes</span>
+                        <span className="font-medium">47</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Avg Rating</span>
+                        <span className="font-medium">4.9</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ) : (
+              // Admin View - Platform Overview
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Total Users</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-xl sm:text-2xl font-bold text-blue-600">1,247</div>
+                    <p className="text-xs sm:text-sm text-gray-600">+12% this month</p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Active Creators</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-xl sm:text-2xl font-bold text-green-600">342</div>
+                    <p className="text-xs sm:text-sm text-gray-600">89 online now</p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Total Revenue</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-xl sm:text-2xl font-bold text-purple-600">$24,580</div>
+                    <p className="text-xs sm:text-sm text-gray-600">+8% this week</p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Pending Reports</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-xl sm:text-2xl font-bold text-red-600">7</div>
+                    <p className="text-xs sm:text-sm text-gray-600">Need review</p>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="chat" className="space-y-4 sm:space-y-6">
@@ -605,45 +776,157 @@ export default function Home() {
           </TabsContent>
 
           <TabsContent value="wallet" className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-              <Card>
-                <CardHeader className="pb-3 sm:pb-6">
-                  <CardTitle className="text-lg sm:text-xl">Wallet Balance</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-4">
-                    ${currentDemoUser.balance || 0}
-                  </div>
-                  <div className="space-y-2">
-                    <Button className="w-full mb-2 text-sm sm:text-base">Add $10</Button>
-                    <Button variant="outline" className="w-full mb-2 text-sm sm:text-base">Add $25</Button>
-                    <Button variant="outline" className="w-full text-sm sm:text-base">Add $50</Button>
-                  </div>
-                </CardContent>
-              </Card>
+            {currentDemoUser.role === 'CUSTOMER' ? (
+              // Customer Wallet View
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Wallet Balance</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-4">
+                      ${currentDemoUser.balance || 0}
+                    </div>
+                    <div className="space-y-2">
+                      <Button className="w-full mb-2 text-sm sm:text-base">Add $10</Button>
+                      <Button variant="outline" className="w-full mb-2 text-sm sm:text-base">Add $25</Button>
+                      <Button variant="outline" className="w-full text-sm sm:text-base">Add $50</Button>
+                    </div>
+                  </CardContent>
+                </Card>
 
-              <Card>
-                <CardHeader className="pb-3 sm:pb-6">
-                  <CardTitle className="text-lg sm:text-xl">Recent Activity</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Chat with Sarah</span>
-                      <span className="text-red-600">-$2.50</span>
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Recent Activity</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Chat with Sarah</span>
+                        <span className="text-red-600">-$2.50</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Call with Emma</span>
+                        <span className="text-red-600">-$6.00</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Added Money</span>
+                        <span className="text-green-600">+$25.00</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Call with Emma</span>
-                      <span className="text-red-600">-$6.00</span>
+                  </CardContent>
+                </Card>
+              </div>
+            ) : currentDemoUser.role === 'CREATOR' ? (
+              // Creator Wallet View - Earnings & Payouts
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Available Balance</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">Ready for withdrawal</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-4">
+                      ${currentDemoUser.balance || 0}
                     </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Added Money</span>
-                      <span className="text-green-600">+$25.00</span>
+                    <div className="space-y-2">
+                      <Button className="w-full mb-2 text-sm sm:text-base">
+                        <DollarSign className="w-4 h-4 mr-2" />
+                        Withdraw to Bank
+                      </Button>
+                      <Button variant="outline" className="w-full text-sm sm:text-base">
+                        View Payout History
+                      </Button>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Earnings Summary</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Today's Earnings</span>
+                        <span className="text-green-600 font-medium">+$45.50</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">This Week</span>
+                        <span className="text-green-600 font-medium">+$312.00</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">This Month</span>
+                        <span className="text-green-600 font-medium">+$1,247.80</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Platform Fee (30%)</span>
+                        <span className="text-red-600 font-medium">-$374.34</span>
+                      </div>
+                      <div className="flex justify-between text-sm font-semibold pt-2 border-t">
+                        <span>Net Earnings</span>
+                        <span className="text-green-600">+$873.46</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ) : (
+              // Admin Wallet View - Platform Revenue
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Platform Revenue</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">Total platform earnings</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-4">
+                      $24,580
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">From Chat (30%)</span>
+                        <span className="text-green-600">+$8,524</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">From Calls (30%)</span>
+                        <span className="text-green-600">+$12,345</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">From Video (30%)</span>
+                        <span className="text-green-600">+$3,711</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="text-lg sm:text-xl">Payout Status</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">Creator payments</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Pending Payouts</span>
+                        <span className="text-orange-600 font-medium">$8,234</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Processed Today</span>
+                        <span className="text-green-600 font-medium">$3,456</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Total Paid Out</span>
+                        <span className="text-blue-600 font-medium">$57,890</span>
+                      </div>
+                      <Button className="w-full mt-4 text-sm sm:text-base">
+                        Process Payouts
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </TabsContent>
 
           {currentDemoUser.role === 'CREATOR' && (
